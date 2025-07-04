@@ -1,12 +1,13 @@
 FROM python:3.12-slim
 
+RUN pip install poetry
+
 WORKDIR /app
 
 COPY ./poetry.lock /app
 COPY ./pyproject.toml /app
 
-RUN pip install poetry
-RUN poetry install
+RUN poetry install --no-root
 
 COPY ./llm_api_server_mock /app/llm_api_server_mock
 
